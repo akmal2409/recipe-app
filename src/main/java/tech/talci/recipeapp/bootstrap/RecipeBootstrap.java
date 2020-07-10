@@ -1,5 +1,6 @@
 package tech.talci.recipeapp.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -9,11 +10,13 @@ import tech.talci.recipeapp.repositories.CategoryRepository;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -22,13 +25,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private UnitOFMeasureRepository unitOFMeasureRepository;
 
     @Autowired
-    public RecipeBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UnitOFMeasureRepository unitOFMeasureRepository) {
+    public RecipeBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
+                           UnitOFMeasureRepository unitOFMeasureRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
         this.unitOFMeasureRepository = unitOFMeasureRepository;
+        log.debug("Loading Bootstrap data...");
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
     }

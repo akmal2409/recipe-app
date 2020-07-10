@@ -1,5 +1,6 @@
 package tech.talci.recipeapp.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import tech.talci.recipeapp.services.RecipeService;
 
 import java.util.Optional;
 
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -22,6 +24,7 @@ public class IndexController {
     public String getIndexPage(Model model){
 
         model.addAttribute("recipes", recipeService.getRecipes());
+        log.debug("Bringing in index page");
 
         return "index";
     }
