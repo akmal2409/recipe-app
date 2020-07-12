@@ -8,6 +8,7 @@ import tech.talci.recipeapp.domain.Recipe;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -40,5 +41,20 @@ public class RecipeServiceImplTest {
 
         assertEquals(1, recipes.size());
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipeById() throws Exception{
+        long id = 1L;
+        Recipe testRecipe = new Recipe();
+        testRecipe.setId(id);
+        Optional<Recipe> recipeOptional = Optional.of(testRecipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe found = recipeService.findById(id);
+
+        assertNotNull("Null recipe returned",found);
+        verify(recipeRepository, times(1)).findById(anyLong());
     }
 }
