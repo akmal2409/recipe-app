@@ -17,13 +17,16 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="margin-top: 20px; width: 150%">
+<div class="container-fluid" style="margin-top: 20px; max-width: 1670px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                        <button type="button" class="btn btn-success" style="margin-left: 85%">
+                        <a href="#" th:href="@{'/index'}" style="color: darkblue; font-weight: bold">Home</a>
+                        </button>
                     </div>
                     <div class="panel-body">
                         <div class="row">
