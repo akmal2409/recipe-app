@@ -17,6 +17,7 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:replace="/fragments/layout :: layout"></div>
 <div class="container-fluid" style="margin-top: 20px; max-width: 1670px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -24,33 +25,35 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
-                        <button type="button" class="btn btn-success" style="margin-left: 85%">
-                        <a href="#" th:href="@{'/index'}" style="color: darkblue; font-weight: bold">Home</a>
-                        </button>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <h5>Categories:</h5>
+                                <h2 style="font-weight: bold; font-family: 'Comic Sans MS'">Categories</h2>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-pull-3">
                                 <ul th:each="cat : ${recipe.getCategories()}">
+                                    <button class="btn-danger" style="width: 100px; height: 35px">
                                     <li th:text="${cat.description}">cat one</li>
+                                    </button>
                                 </ul>
                             </div>
                         </div>
                         <div class="row" style="margin-top: 0.5em">
                             <div class="col-md-3">
-                                <h5>Prep Time:</h5>
+                                <h3 style="font-weight: bold; font-family: 'Comic Sans MS'">Prep Time:</h3>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${recipe.prepTime}">30 min</p>
+                                <button class="btn-info" th:text="${recipe.prepTime}" style="width: 40px; height: 40px">30 min</button>
+                                <i class="glyphicon glyphicon-time"></i>
                             </div>
                             <div class="col-md-3">
-                                <h5>Difficulty:</h5>
+                                <h4 style="font-weight: bold; font-family: 'Comic Sans MS'">Difficulty:</h4>
                             </div>
                             <div class="col-md-3">
+                                <button class="btn-danger">
                                 <p th:text="${recipe.difficulty.toString()}">Easy</p>
+                                </button>
                             </div>
                         </div>
                         <div class="row">
