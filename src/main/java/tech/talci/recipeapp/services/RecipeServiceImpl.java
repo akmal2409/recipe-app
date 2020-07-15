@@ -10,6 +10,7 @@ import tech.talci.recipeapp.repositories.RecipeRepository;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -51,4 +52,14 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
+    }
 }

@@ -32,12 +32,16 @@
                                 <th>ID</th>
                                 <th>Description</th>
                                 <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tr th:each="recipe : ${recipes}">
                                 <td th:text="${recipe.id}">123</td>
-                                <td th:text="${recipe.description}">Tastry</td>
-                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View more</a></td>
+                                <td th:text="${recipe.description}">Tasty</td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}"><button type="button" class="btn btn-success">View more</button></a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}"><button type="button" class="btn btn-info">Edit</button></a></td>
+                                <th><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}"><button type="button" class="btn btn-danger">Delete</button></a></th>
                             </tr>
                         </table>
                     </div>
