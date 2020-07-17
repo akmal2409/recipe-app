@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import tech.talci.recipeapp.commands.IngredientCommand;
 import tech.talci.recipeapp.domain.Ingredient;
+import tech.talci.recipeapp.domain.Recipe;
 import tech.talci.recipeapp.domain.UnitOfMeasure;
 
 import java.math.BigDecimal;
@@ -17,6 +18,8 @@ public class IngredientToIngredientCommandTest {
     public static final String DESCRIPTION = "description";
     public static final Long UOM_ID = Long.valueOf(2L);
     public static final BigDecimal AMOUNT = new BigDecimal("1");
+    public static final Long RECIPE_ID = Long.valueOf(3L);
+
 
     IngredientToIngredientCommand converter;
 
@@ -32,9 +35,15 @@ public class IngredientToIngredientCommandTest {
         ingredient.setDescription(DESCRIPTION);
         ingredient.setId(ID_VALUE);
         ingredient.setAmount(AMOUNT);
+
+        //Recipe recipe = new Recipe();
+        //recipe.setId(RECIPE_ID);
+
         UnitOfMeasure uom = new UnitOfMeasure();
         uom.setId(UOM_ID);
+
         ingredient.setUom(uom);
+        //ingredient.setRecipe(recipe);
 
         //when
         IngredientCommand command = converter.convert(ingredient);
@@ -45,7 +54,7 @@ public class IngredientToIngredientCommandTest {
         assertEquals(AMOUNT, command.getAmount());
         assertEquals(DESCRIPTION, command.getDescription());
         assertEquals(UOM_ID, command.getUom().getId());
-
+        //assertEquals(RECIPE_ID, command.getRecipeId());
     }
 
     @Test
