@@ -24,10 +24,16 @@
             <div class="pannel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                        <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/image'}">
+                            <button class="btn btn-info">Change Image</button></a>
+                        <h1 class="panel-title" th:text="${recipe.description}" style="margin-left: 125px; margin-top: -25px; margin-bottom: 10px">Recipe Description Here!</h1>
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
+                            <div th:if="${recipe.getImage()}">
+                                <img class="img-circle" style="width: 300px; height: 300px" th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}">
+                            </div>
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
