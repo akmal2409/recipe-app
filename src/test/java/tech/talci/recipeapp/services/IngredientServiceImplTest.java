@@ -11,6 +11,7 @@ import tech.talci.recipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import tech.talci.recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import tech.talci.recipeapp.domain.Ingredient;
 import tech.talci.recipeapp.domain.Recipe;
+import tech.talci.recipeapp.exceptions.NotFoundException;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
 
@@ -30,6 +31,8 @@ public class IngredientServiceImplTest {
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
 
     UnitOfMeasureService unitOfMeasureService;
+
+
     IngredientService ingredientService;
 
     @Mock
@@ -128,4 +131,5 @@ public class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
     }
+
 }

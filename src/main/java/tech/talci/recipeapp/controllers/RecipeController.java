@@ -63,13 +63,4 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public String handleNotFound(Model model, Exception exception){
-
-        log.error("Handling not found exception");
-        model.addAttribute("exception", exception);
-
-        return "errorPages/404error";
-    }
 }

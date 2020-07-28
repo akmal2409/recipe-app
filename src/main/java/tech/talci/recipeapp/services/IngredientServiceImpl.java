@@ -7,6 +7,7 @@ import tech.talci.recipeapp.converters.IngredientCommandToIngredient;
 import tech.talci.recipeapp.converters.IngredientToIngredientCommand;
 import tech.talci.recipeapp.domain.Ingredient;
 import tech.talci.recipeapp.domain.Recipe;
+import tech.talci.recipeapp.exceptions.NotFoundException;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
 
@@ -54,6 +55,7 @@ public class IngredientServiceImpl implements IngredientService {
 
         if(!ingredientCommandOptional.isPresent()){
             log.error("Ingredient not found");
+            throw new NotFoundException("Ingredient not found ID: " + ingredientId + "\nFor Recipe ID: " + recipeId);
         }
 
         return ingredientCommandOptional.get();
