@@ -14,6 +14,7 @@ import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.services.RecipeService;
 
 import java.awt.*;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +28,9 @@ public class RecipeControllerTest {
 
     @Mock
     RecipeService recipeService;
+
+    @Mock
+    RecipeRepository recipeRepository;
 
     RecipeController controller;
 
@@ -99,5 +103,21 @@ public class RecipeControllerTest {
                 .andExpect(view().name("redirect:/"));
 
         verify(recipeService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void testGetRecipeByIdNotFound() throws Exception{
+        //given
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        //when
+
+
+        Recipe recipeReturned = recipeService.findById(1L);
+
+        //then
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 }

@@ -8,6 +8,7 @@ import tech.talci.recipeapp.converters.RecipeCommandToRecipe;
 import tech.talci.recipeapp.converters.RecipeToRecipeCommand;
 import tech.talci.recipeapp.domain.Ingredient;
 import tech.talci.recipeapp.domain.Recipe;
+import tech.talci.recipeapp.exceptions.NotFoundException;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 
 import javax.transaction.Transactional;
@@ -41,7 +42,14 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public Recipe findById(Long id){
-        return recipeRepository.findById(id).orElse(null);
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent()){
+            throw new NotFoundException("Recipe Not Found");
+        }
+
+        return recipeOptional.get();
     }
 
     @Override
