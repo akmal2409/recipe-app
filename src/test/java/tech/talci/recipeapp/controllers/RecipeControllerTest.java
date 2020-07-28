@@ -7,9 +7,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.HttpClientErrorException;
 import tech.talci.recipeapp.commands.RecipeCommand;
 import org.springframework.http.MediaType;
 import tech.talci.recipeapp.domain.Recipe;
+import tech.talci.recipeapp.exceptions.NotFoundException;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.services.RecipeService;
 
@@ -106,18 +108,12 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void testGetRecipeByIdNotFound() throws Exception{
-        //given
-        Recipe recipe = new Recipe();
-        recipe.setId(1L);
+    public void testRecipeNotFound() throws Exception{
 
-        //when
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
 
-
-        Recipe recipeReturned = recipeService.findById(1L);
-
-        //then
         mockMvc.perform(get("/recipe/1/show"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
     }
 }

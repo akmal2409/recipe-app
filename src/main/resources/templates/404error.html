@@ -24,16 +24,26 @@
         <div class="panel panel-warning">
             <hr>
             <h1 class="panel-warning" style="text-align: center">Requested resource was not found!</h1>
+
+            <hr>
+            <div class="panel panel-warning" th:if="${exception}" style="margin-left: 15px; margin-right: 15px">
+                <div class="panel-heading">
+                    <h4>Log output</h4>
+                </div>
+                <div class="panel-body">
+                    <h5 th:text="${exception.getMessage()}"></h5>
+                </div>
+            </div>
+
             <h4 style="text-align: center">
-                <ul>
-                    <hr>
-                    <li>Check address bar, you might have mistyped the URL</li>
-                    <hr>
-                    <li>Request page/content does not exist</li>
-                    <hr>
-                    <li>Material was removed</li>
-                    <hr>
-                </ul>
+                <hr>
+                Check the address bar, you might have mistyped the URL
+                <hr>
+                Request page/content does not exist
+                <hr>
+                Material was removed
+                <hr>
+
             </h4>
             <hr>
             <h4 style="text-align: center">If you get this error trying to access any page, contact our administrator
