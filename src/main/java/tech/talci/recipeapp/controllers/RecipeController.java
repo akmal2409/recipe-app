@@ -28,6 +28,10 @@ public class RecipeController {
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
 
+        if(!id.matches("-?\\d+")){
+            throw new NumberFormatException("ID is not numeric! Your input ID: " + id);
+        }
+
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
 
         return "recipe/show";
@@ -69,9 +73,17 @@ public class RecipeController {
         log.error("Handling not found exception");
         model.addAttribute("exception", exception);
 
-        return "404error";
+        return "errorPages/404error";
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public String handleNumberFormatException(Model model, Exception exception){
 
+        log.error("Handling number exception error");
+        model.addAttribute("exception", exception);
+
+        return "errorPages/400error";
+    }
 
 }
