@@ -128,4 +128,22 @@ public class RecipeControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(view().name("errorPages/400error"));
     }
+
+    @Test
+    public void testPostNewRecipeFormValidationFail() throws Exception{
+        //given
+        RecipeCommand command = new RecipeCommand();
+        command.setId(2L);
+
+        //when
+        when(recipeService.saveRecipeCommand(any())).thenReturn(command);
+
+        //then
+        mockMvc.perform(post("/recipe")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", ""))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("recipe"))
+                .andExpect(view().name("recipe/recipe_form"));
+    }
 }
