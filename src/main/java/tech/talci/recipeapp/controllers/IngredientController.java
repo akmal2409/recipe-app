@@ -22,6 +22,9 @@ public class IngredientController {
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
     private final UnitOfMeasureService unitOfMeasureService;
+    private final String INGREDIENTFORM_URL = "recipe/ingredient/ingredientform";
+    private final String INGREDIENT_SHOW_URL = "recipe/ingredient/show";
+    private final String INGREDIENT_LIST_URL = "recipe/ingredient/list";
 
     public IngredientController(RecipeService recipeService, IngredientService ingredientService,
                                 UnitOfMeasureService unitOfMeasureService) {
@@ -36,7 +39,7 @@ public class IngredientController {
         log.debug("Getting list of ingredients for Recipe ID: " + id);
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
 
-        return "recipe/ingredient/list";
+        return INGREDIENT_LIST_URL;
     }
 
 
@@ -46,7 +49,7 @@ public class IngredientController {
                                  Model model){
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId),
                 Long.valueOf(ingredientId)));
-        return "recipe/ingredient/show";
+        return INGREDIENT_SHOW_URL;
     }
 
 
@@ -57,7 +60,7 @@ public class IngredientController {
                 Long.valueOf(id)));
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
-        return "recipe/ingredient/ingredientform";
+        return INGREDIENTFORM_URL;
     }
 
 
@@ -87,7 +90,7 @@ public class IngredientController {
         ingredientCommand.setUom(new UnitOfMeasureCommand());
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
-        return "recipe/ingredient/ingredientform";
+        return INGREDIENTFORM_URL;
     }
 
 

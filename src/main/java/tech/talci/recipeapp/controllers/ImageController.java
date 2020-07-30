@@ -22,6 +22,7 @@ public class ImageController {
 
     private final ImageService imageService;
     private final RecipeService recipeService;
+    private final String IMAGEUPLOADFORM_URL = "/recipe/imageuploadform";
 
     public ImageController(ImageService imageService, RecipeService recipeService) {
         this.imageService = imageService;
@@ -33,7 +34,7 @@ public class ImageController {
 
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
 
-        return "/recipe/imageuploadform";
+        return IMAGEUPLOADFORM_URL;
     }
 
     @PostMapping("recipe/{id}/image")
