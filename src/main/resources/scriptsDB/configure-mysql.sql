@@ -12,9 +12,11 @@ CREATE USER 'talci_dev_user'@'localhost' IDENTIFIED BY 'talci';
 CREATE USER 'talci_prod_user'@'localhost' IDENTIFIED BY 'talci';
 /*
 For docker, we need to set up alternatives for connection
+Because we will be coming from a different IP address and mysql will think those are
+two different machines
  */
-CREATE USER 'talci_dev_user'@'%' INDENTIFIED BY 'talci';
-CREATE USER 'talci_prod_user'@'%' INDENTIFIED BY 'talci';
+CREATE USER 'talci_dev_user'@'%' IDENTIFIED BY 'talci';
+CREATE USER 'talci_prod_user'@'%' IDENTIFIED BY 'talci';
 
 GRANT SELECT ON talci_dev.* to 'talci_dev_user'@'localhost';
 GRANT INSERT ON talci_dev.* to 'talci_dev_user'@'localhost';
