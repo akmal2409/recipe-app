@@ -10,6 +10,11 @@ CREATE DATABASE talci_prod;
 
 CREATE USER 'talci_dev_user'@'localhost' IDENTIFIED BY 'talci';
 CREATE USER 'talci_prod_user'@'localhost' IDENTIFIED BY 'talci';
+/*
+For docker, we need to set up alternatives for connection
+ */
+CREATE USER 'talci_dev_user'@'%' INDENTIFIED BY 'talci';
+CREATE USER 'talci_prod_user'@'%' INDENTIFIED BY 'talci';
 
 GRANT SELECT ON talci_dev.* to 'talci_dev_user'@'localhost';
 GRANT INSERT ON talci_dev.* to 'talci_dev_user'@'localhost';
@@ -19,3 +24,14 @@ GRANT SELECT ON talci_prod.* to 'talci_prod_user'@'localhost';
 GRANT INSERT ON talci_prod.* to 'talci_prod_user'@'localhost';
 GRANT DELETE ON talci_prod.* to 'talci_prod_user'@'localhost';
 GRANT UPDATE ON talci_prod.* to 'talci_prod_user'@'localhost';
+/*
+For Docker
+ */
+GRANT SELECT ON talci_dev.* to 'talci_dev_user'@'%';
+GRANT INSERT ON talci_dev.* to 'talci_dev_user'@'%';
+GRANT DELETE ON talci_dev.* to 'talci_dev_user'@'%';
+GRANT UPDATE ON talci_dev.* to 'talci_dev_user'@'%';
+GRANT SELECT ON talci_prod.* to 'talci_prod_user'@'%';
+GRANT INSERT ON talci_prod.* to 'talci_prod_user'@'%';
+GRANT DELETE ON talci_prod.* to 'talci_prod_user'@'%';
+GRANT UPDATE ON talci_prod.* to 'talci_prod_user'@'%';
