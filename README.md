@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/akmal2409/recipe-app.svg?style=svg)](https://circleci.com/gh/akmal2409/recipe-app)
 # recipe-app
 Recipe App (Spring MVC used)
 
