@@ -3,6 +3,7 @@ spring:
     url: jdbc:mysql://192.168.0.116:3306/talci_prod
     username: talci_prod_user
     password: talci
+    platform: mysql
   jpa:
     hibernate:
       ddl-auto: validate
