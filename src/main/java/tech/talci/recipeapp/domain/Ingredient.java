@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class Ingredient {
 
-    @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String description;
     private BigDecimal amount;
 
