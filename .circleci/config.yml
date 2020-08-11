@@ -39,7 +39,6 @@ jobs:
 
       # run tests!
       - run: mvn install
-      - run: jacocoTestReport
 
       - run:
           name: Send to CodeCov

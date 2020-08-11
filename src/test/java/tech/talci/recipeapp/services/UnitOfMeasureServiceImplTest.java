@@ -32,7 +32,7 @@ public class UnitOfMeasureServiceImplTest {
     public void listAllUoms() {
         //given
         UnitOfMeasure uom = new UnitOfMeasure();
-        uom.setId(2L);
+        uom.setId("2");
         Set<UnitOfMeasure> uomSet = new HashSet<>();
         uomSet.add(uom);
 

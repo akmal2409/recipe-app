@@ -4,26 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
-@Entity
+@Getter
+@Setter
 public class Notes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne // No Cascade, wont affect recipe object
+    private String id;
     private Recipe recipe; // OneToOne
-
-    @Lob // For large data (We want more than 250 char)
     private String recipeNotes;
 
     public Notes() {
-    }
-
-    protected boolean canEqual(final Object other) {
-        return other instanceof Notes;
     }
 
 }
