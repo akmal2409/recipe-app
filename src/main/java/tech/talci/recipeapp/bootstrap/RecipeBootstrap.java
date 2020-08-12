@@ -10,6 +10,7 @@ import tech.talci.recipeapp.domain.*;
 import tech.talci.recipeapp.repositories.CategoryRepository;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
+import tech.talci.recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
