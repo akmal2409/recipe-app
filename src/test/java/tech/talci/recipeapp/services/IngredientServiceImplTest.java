@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import reactor.core.publisher.Mono;
 import tech.talci.recipeapp.commands.IngredientCommand;
 import tech.talci.recipeapp.converters.IngredientCommandToIngredient;
 import tech.talci.recipeapp.converters.IngredientToIngredientCommand;
@@ -79,9 +80,9 @@ public class IngredientServiceImplTest {
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
         //then
-        IngredientCommand command = ingredientService.findByRecipeIdAndIngredientId("1", "3");
+        Mono<IngredientCommand> command = ingredientService.findByRecipeIdAndIngredientId("1", "3");
 
-        assertEquals("3", command.getId());
+        assertEquals("3", command.block().getId());
     }
 
     @Test
@@ -101,10 +102,10 @@ public class IngredientServiceImplTest {
         when(recipeRepository.save(any())).thenReturn(savedRecipe);
 
         //when
-        IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
+        Mono<IngredientCommand> savedCommand = ingredientService.saveIngredientCommand(command);
 
         //then
-        assertEquals("3", savedCommand.getId());
+        assertEquals("3", savedCommand.block().getId());
         verify(recipeRepository, times(1)).findById(anyString());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
