@@ -16,6 +16,7 @@ import tech.talci.recipeapp.repositories.reactive.UnitOfMeasureReactiveRepositor
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,16 +29,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private RecipeRepository recipeRepository;
     private CategoryRepository categoryRepository;
     private UnitOFMeasureRepository unitOfMeasureRepository;
-
-    //test
-    @Autowired
-    CategoryReactiveRepository categoryReactiveRepository;
-
-    @Autowired
-    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
-
-    @Autowired
-    RecipeReactiveRepository recipeReactiveRepository;
 
     @Autowired
     public RecipeBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
@@ -55,13 +46,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         loadUom();
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
-
-
-        log.debug("############ UOMS ##########");
-        log.error("Uom Count: " + unitOfMeasureReactiveRepository.count().block().toString());
-
-        log.debug("############ Categories ##########");
-        log.error("Categories Count: " + categoryReactiveRepository.count().block().toString());
 
     }
 
