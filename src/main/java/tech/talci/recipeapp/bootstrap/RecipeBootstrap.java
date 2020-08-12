@@ -10,6 +10,8 @@ import tech.talci.recipeapp.domain.*;
 import tech.talci.recipeapp.repositories.CategoryRepository;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
+import tech.talci.recipeapp.repositories.reactive.CategoryReactiveRepository;
+import tech.talci.recipeapp.repositories.reactive.RecipeReactiveRepository;
 import tech.talci.recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 
 import javax.transaction.Transactional;
@@ -27,6 +29,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private CategoryRepository categoryRepository;
     private UnitOFMeasureRepository unitOfMeasureRepository;
 
+    //test
+    @Autowired
+    CategoryReactiveRepository categoryReactiveRepository;
+
+    @Autowired
+    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+
+    @Autowired
+    RecipeReactiveRepository recipeReactiveRepository;
+
     @Autowired
     public RecipeBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
                            UnitOFMeasureRepository unitOFMeasureRepository) {
@@ -43,6 +55,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         loadUom();
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
+
+
+        log.debug("############ UOMS ##########");
+        log.error("Uom Count: " + unitOfMeasureReactiveRepository.count().block().toString());
+
+        log.debug("############ Categories ##########");
+        log.error("Categories Count: " + categoryReactiveRepository.count().block().toString());
+
     }
 
     private void loadCategories(){
