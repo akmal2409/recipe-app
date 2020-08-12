@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import reactor.core.publisher.Flux;
 import tech.talci.recipeapp.commands.IngredientCommand;
 import tech.talci.recipeapp.commands.RecipeCommand;
 import tech.talci.recipeapp.commands.UnitOfMeasureCommand;
@@ -94,7 +95,7 @@ public class IngredientControllerTest {
 
         //when
         when(ingredientService.findByRecipeIdAndIngredientId(anyString(), anyString())).thenReturn(command);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
 
         //then
         mockMvc.perform(get("/recipe/2/ingredient/1/update"))
@@ -134,7 +135,7 @@ public class IngredientControllerTest {
 
         //when
         when(recipeService.findCommandById(anyString())).thenReturn(recipeCommand);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
 
         //then
         mockMvc.perform(get("/recipe/1/ingredient/new"))
