@@ -12,9 +12,12 @@ import tech.talci.recipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import tech.talci.recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import tech.talci.recipeapp.domain.Ingredient;
 import tech.talci.recipeapp.domain.Recipe;
+import tech.talci.recipeapp.domain.UnitOfMeasure;
 import tech.talci.recipeapp.exceptions.NotFoundException;
 import tech.talci.recipeapp.repositories.RecipeRepository;
 import tech.talci.recipeapp.repositories.UnitOFMeasureRepository;
+import tech.talci.recipeapp.repositories.reactive.RecipeReactiveRepository;
+import tech.talci.recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -40,7 +43,10 @@ public class IngredientServiceImplTest {
     RecipeRepository recipeRepository;
 
     @Mock
-    UnitOFMeasureRepository unitOFMeasureRepository;
+    UnitOfMeasureReactiveRepository unitOFMeasureRepository;
+
+    @Mock
+    RecipeReactiveRepository recipeReactiveRepository;
 
 
     public IngredientServiceImplTest() {
@@ -52,8 +58,8 @@ public class IngredientServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand,
-                ingredientCommandToIngredient, recipeRepository, unitOFMeasureRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient,
+                                        recipeReactiveRepository, unitOFMeasureRepository, recipeRepository);
     }
 
     @Test
