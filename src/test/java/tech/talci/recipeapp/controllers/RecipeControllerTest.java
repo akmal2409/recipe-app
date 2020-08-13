@@ -51,9 +51,9 @@ public class RecipeControllerTest {
     @Test
     public void getRecipe() throws Exception{
         Recipe testRecipe = new Recipe();
-        testRecipe.setId("1");
+        testRecipe.setId(1L);
 
-        when(recipeService.findById(anyString())).thenReturn(testRecipe);
+        when(recipeService.findById(anyLong())).thenReturn(testRecipe);
 
         mockMvc.perform(org.springframework.test.web.servlet
                 .request.MockMvcRequestBuilders.get("/recipe/1/show"))
@@ -74,7 +74,7 @@ public class RecipeControllerTest {
     @Test
     public void testPostRecipe() throws Exception{
         RecipeCommand command = new RecipeCommand();
-        command.setId("2");
+        command.setId(2L);
 
         when(recipeService.saveRecipeCommand(any())).thenReturn(command);
 
@@ -94,9 +94,9 @@ public class RecipeControllerTest {
     @Test
     public void testGetUpdateAction() throws Exception{
         RecipeCommand command = new RecipeCommand();
-        command.setId("2");
+        command.setId(2L);
 
-        when(recipeService.findCommandById(anyString())).thenReturn(command);
+        when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
         mockMvc.perform(get("/recipe/2/update"))
                 .andExpect(status().isOk())
@@ -110,13 +110,13 @@ public class RecipeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 
-        verify(recipeService, times(1)).deleteById(anyString());
+        verify(recipeService, times(1)).deleteById(anyLong());
     }
 
     @Test
     public void testRecipeNotFound() throws Exception{
 
-        when(recipeService.findById(anyString())).thenThrow(NotFoundException.class);
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
 
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound())
@@ -137,7 +137,7 @@ public class RecipeControllerTest {
     public void testPostNewRecipeFormValidationFail() throws Exception{
         //given
         RecipeCommand command = new RecipeCommand();
-        command.setId("2");
+        command.setId(2L);
 
         //when
         when(recipeService.saveRecipeCommand(any())).thenReturn(command);

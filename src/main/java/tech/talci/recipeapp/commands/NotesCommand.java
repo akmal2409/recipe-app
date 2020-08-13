@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class NotesCommand {
-    private String id;
+    private Long id;
     private RecipeCommand recipe;
     private String recipeNotes;
 }

@@ -1,7 +1,6 @@
 package tech.talci.recipeapp.controllers;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -45,16 +44,16 @@ public class ImageControllerTest {
     public void testGetUploadForm() throws Exception{
         //given
         RecipeCommand command = new RecipeCommand();
-        command.setId("1");
+        command.setId(1L);
 
         //when
-        when(recipeService.findCommandById(anyString())).thenReturn(command);
+        when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
         mockMvc.perform(get("/recipe/1/image"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(1)).findCommandById(anyString());
+        verify(recipeService, times(1)).findCommandById(anyLong());
     }
 
     @Test
@@ -71,7 +70,7 @@ public class ImageControllerTest {
     public void testRenderImageFromDB() throws Exception{
         //given
         RecipeCommand command = new RecipeCommand();
-        command.setId("2");
+        command.setId(2L);
 
         //test file to be converted to Byte[]
         String s = "file test";
@@ -86,7 +85,7 @@ public class ImageControllerTest {
         command.setImage(bytes);
 
         //when
-        when(recipeService.findCommandById(anyString())).thenReturn(command);
+        when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
                 .andExpect(status().isOk())
@@ -98,6 +97,11 @@ public class ImageControllerTest {
         assertEquals(s.getBytes().length, responseBytes.length);
     }
 
+    @Test
+    public void testGetImageNumberFormatException() throws Exception{
 
-
+        mockMvc.perform(get("/recipe/sada/recipeimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("errorPages/400error"));
+    }
 }

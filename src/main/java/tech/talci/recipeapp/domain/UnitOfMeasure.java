@@ -1,16 +1,17 @@
 package tech.talci.recipeapp.domain;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@Document
+@Data
+@Entity
 public class UnitOfMeasure {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String description;
+
 }

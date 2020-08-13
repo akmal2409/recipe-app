@@ -34,7 +34,7 @@ public class ImageServiceImplTest {
     @Test
     public void saveImageFile() throws Exception{
         //given
-        String id = "1";
+        Long id = 1L;
         MultipartFile multipartFile = new MockMultipartFile("imagefile", "testing.txt", "text/plain",
                 "Recipe App".getBytes());
 
@@ -43,7 +43,7 @@ public class ImageServiceImplTest {
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 
         //when
-        when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 
         ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
 

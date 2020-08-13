@@ -1,22 +1,21 @@
 package tech.talci.recipeapp.domain;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Getter
-@Setter
-@Document
+@Data
+@EqualsAndHashCode(exclude = {"recipes"})
+@Entity
 public class Category {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
 
-    @DBRef
+    @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
     public String getCategoryName() {
